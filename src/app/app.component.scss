@@ -1,0 +1,29 @@
+.result-text{
+    border: 1px solid #040273;
+    border-radius: 0.3em;
+    height: 5rem;
+    width: 40%; 
+}
+.buttonsection{
+    // margin-top: 1%;
+    margin-left: 4%;
+    // cursor: pointer;
+}
+//mobile 
+@media screen  and (max-width:767px) {
+    .buttonsection{
+        margin-top: 1%;
+        margin-left: 4%;
+        cursor: pointer;
+    } 
+}
+
+.form{
+    display: flex;
+    margin-top: 2rem;
+    /* margin: auto; */
+    width: 50%;
+}
+.text-area{
+    width: 80% ;
+}

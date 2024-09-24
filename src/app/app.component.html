@@ -1,11 +1,24 @@
+<loader *ngIf="loader"></loader>
+<div class="main-container">
+    <div class="result-text" *ngIf="txt">
+        <markdown [data]="txt"></markdown>
+    </div>
+    <form name="f" [formGroup]="form"  (ngSubmit)="sendData()"class="form">
+        <div class="text-area">
+            <input  keyup.enter="sendData()" name="name" type="text" style="width: 99%; border-radius: 0.3em;" formControlName="Chat" placeholder="Enter Info needed" type="name" >
+        </div>
+        <div class="buttonsection">
+            <button style="width: 6rem;
+            background-color: #040273;
+            color: white;
+            border-radius: 6px;
+            height: 30px;
+            cursor: pointer;" >send</button>
+        </div>
+        <div class="fa-paper-plane"></div>
+    </form>
+    
+</div>
 
 
-<form name="f" [formGroup]="form"  (ngSubmit)="sendData()"class="form">
-<input name="name"  formControlName="Chat" placeholder="Enter Info needed" type="name" >
-<button >send</button>
-</form>
-<!-- <h1>{{txt}}</h1> -->
-<!-- <div [innerHTML]="txt"></div> -->
-<markdown [data]="txt"></markdown>
-<p>API URL: {{ apiurl }}</p>
 <router-outlet></router-outlet>

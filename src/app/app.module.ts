@@ -9,10 +9,12 @@ import {  HttpClient, provideHttpClient, withInterceptorsFromDi } from '@angular
 import { ReactiveFormsModule } from '@angular/forms';
 import { MarkdownModule } from 'ngx-markdown';
 import { API_URL } from './app.tokens';
+import { LoaderComponent } from './loader/loader.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    LoaderComponent
   ],
   imports: [
     BrowserModule,

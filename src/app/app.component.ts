@@ -6,6 +6,7 @@ import { HttpClient } from '@angular/common/http';
 import { FormBuilder, FormGroup, Validators, FormControl, } from '@angular/forms';
 // import { GeminiService } from './gemini.service';
 import { API_URL } from './app.tokens';
+import { from } from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -19,27 +20,37 @@ export class AppComponent {
    form: FormGroup
    txt:any
    apiurl:any
+   loader:boolean=false
   // geminiService:GeminiService = inject(GeminiService);
   constructor( 
     public http: HttpClient,
     public geminiService:GeminiService,
     public fb: FormBuilder,
-    @Inject(API_URL) private apiUrlToken: string
+    // @Inject(API_URL) private apiUrlToken: string
   )
   {
     this.form = this.fb.group({
       Chat: ['', [Validators.required]],
      
     });
-    this.apiurl=apiUrlToken
+    // this.apiurl=apiUrlToken
   }
   ngOnInit(){
     // this.buildForm()
   }
   sendData(){
-    this.geminiService.getnewapi("AIzaSyAkFTzBuOOJ_7Vnl3WWvaLufpioAsUBPqk")
+    this.loader=true;
     let c=this.form.value.Chat;
-   this.geminiService.genText(c).then(u => this.txt = u);
+    if(c==""){
+      this.txt="Please enter the Info to Continue"
+    }else{
+      this.loader=true;
+      from(this.geminiService.genText(c)).subscribe(u => 
+        {
+          this.loader=false
+          this.txt = u
+        });
+    }
   }
  
 }
