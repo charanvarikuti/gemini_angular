@@ -10,7 +10,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { MarkdownModule } from 'ngx-markdown';
 import { API_URL } from './app.tokens';
 import { LoaderComponent } from './loader/loader.component';
-
+import { ClipboardModule } from '@angular/cdk/clipboard';
 @NgModule({
   declarations: [
     AppComponent,
@@ -20,7 +20,8 @@ import { LoaderComponent } from './loader/loader.component';
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,
-    MarkdownModule.forRoot()
+    MarkdownModule.forRoot(),
+    ClipboardModule
     // HttpClient
     // GoogleGenerativeAI
   ],

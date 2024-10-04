@@ -1,25 +1,47 @@
 <loader *ngIf="loader"></loader>
 <div class="main-container">
-    <div class="result-text" *ngIf="txt">
-        <markdown style="color:blue" [data]="txt"></markdown>
-        <markdown  style=" text-align: right;"[data]="reqtxt"></markdown>
+    <div class="result-text" *ngIf="txt && !loader">
+        <div class="text-section">
+            <markdown style="color:rgb(7, 7, 9);width: 90%;" [data]="txt"></markdown>
+
+            <button style="color: white;
+            /* float: right; */
+            border-radius: 1rem;
+            cursor: pointer;
+            width: 10%;
+            background-color: #333;
+            margin-right: 1rem;" *ngIf="!copied &&initialFlag"(click)="copytoclipboard(txt)">Copy</button>
+            <span *ngIf="copied" style="color: rgb(35, 47, 60); margin-left: 10px;float: right;">Copied to Clipboard!</span>
+          
+        </div>
+        
+        <div class="req_text"> 
+            <markdown  style=" text-align: right; color: #800000;"[data]="reqtxt"></markdown>
+        </div>
     </div>
+   
     <form name="f" [formGroup]="form"  (ngSubmit)="sendData()"class="form">
         <div class="text-area">
             <input  keyup.enter="sendData()" name="name" type="text" style="width: 99%; border-radius: 0.3em;" formControlName="Chat" placeholder="Enter Info needed" type="name" >
         </div>
         <div class="buttonsection fa fa-paper-plane ">
-            <button style="width: 6rem;
-            background-color: #040273;
+            <button style="background-color: black;
             color: white;
-            border-radius: 6px;
-            height: 30px;
-            cursor: pointer;" >send</button>
+            border-radius: 50%;
+            /* height: 79%; */
+            cursor: pointer;
+        ">
+            <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" class="icon-2xl"><path fill-rule="evenodd" clip-rule="evenodd" d="M15.1918 8.90615C15.6381 8.45983 16.3618 8.45983 16.8081 8.90615L21.9509 14.049C22.3972 14.4953 22.3972 15.2189 21.9509 15.6652C21.5046 16.1116 20.781 16.1116 20.3347 15.6652L17.1428 12.4734V22.2857C17.1428 22.9169 16.6311 23.4286 15.9999 23.4286C15.3688 23.4286 14.8571 22.9169 14.8571 22.2857V12.4734L11.6652 15.6652C11.2189 16.1116 10.4953 16.1116 10.049 15.6652C9.60265 15.2189 9.60265 14.4953 10.049 14.049L15.1918 8.90615Z" fill="currentColor"></path></svg></button>
+           
         </div>
         <div class="fa-paper-plane"></div>
     </form>
     
 </div>
-
-
+<!-- 
+<div class="spinner1" >
+    <div class="bounce1"></div>
+    <div class="bounce2"></div>
+    <div class="bounce3"></div>
+</div> -->
 <router-outlet></router-outlet>

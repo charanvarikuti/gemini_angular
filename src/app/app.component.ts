@@ -7,6 +7,7 @@ import { FormBuilder, FormGroup, Validators, FormControl, } from '@angular/forms
 // import { GeminiService } from './gemini.service';
 import { API_URL } from './app.tokens';
 import { from } from 'rxjs';
+import { Clipboard } from '@angular/cdk/clipboard';
 
 @Component({
   selector: 'app-root',
@@ -22,11 +23,15 @@ export class AppComponent {
    apiurl:any
    reqtxt:any;
    loader:boolean=false
+   loader1:boolean=false
+   copied:boolean=false;
+   initialFlag:boolean=false;
   // geminiService:GeminiService = inject(GeminiService);
   constructor( 
     public http: HttpClient,
     public geminiService:GeminiService,
     public fb: FormBuilder,
+    private clipboard: Clipboard
     // @Inject(API_URL) private apiUrlToken: string
   )
   {
@@ -34,6 +39,10 @@ export class AppComponent {
       Chat: ['', [Validators.required]],
      
     });
+    this.txt="Ask V"
+    if(this.txt=="Ask V"){
+      this.initialFlag=false
+    }
     // this.apiurl=apiUrlToken
   }
   ngOnInit(){
@@ -48,12 +57,26 @@ export class AppComponent {
       this.txt="Please enter the Info to Continue"
     }else{
       this.loader=true;
+      this.loader1=true
+
       from(this.geminiService.genText(c)).subscribe(u => 
         {
           this.loader=false
           this.txt = u
+          this.initialFlag=true
+          setTimeout(() => {
+            this.loader1=false
+          }, 1000);
         });
     }
+  }
+  copytoclipboard(text: string){
+    this.clipboard.copy(text);  
+    this.copied = true; 
+
+    setTimeout(() => {
+      this.copied = false;
+    }, 1000);
   }
  
 }
