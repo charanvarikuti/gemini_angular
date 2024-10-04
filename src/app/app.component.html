@@ -1,13 +1,14 @@
 <loader *ngIf="loader"></loader>
 <div class="main-container">
     <div class="result-text" *ngIf="txt">
-        <markdown [data]="txt"></markdown>
+        <markdown style="color:blue" [data]="txt"></markdown>
+        <markdown  style=" text-align: right;"[data]="reqtxt"></markdown>
     </div>
     <form name="f" [formGroup]="form"  (ngSubmit)="sendData()"class="form">
         <div class="text-area">
             <input  keyup.enter="sendData()" name="name" type="text" style="width: 99%; border-radius: 0.3em;" formControlName="Chat" placeholder="Enter Info needed" type="name" >
         </div>
-        <div class="buttonsection">
+        <div class="buttonsection fa fa-paper-plane ">
             <button style="width: 6rem;
             background-color: #040273;
             color: white;

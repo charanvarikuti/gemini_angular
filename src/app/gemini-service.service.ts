@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Inject, Injectable } from '@angular/core';
 import { GoogleGenerativeAI } from '@google/generative-ai';
 import { InjectionToken } from '@angular/core';
+import { environment } from '../environments/environment';
 @Injectable({
   providedIn: 'root'
 })
@@ -9,7 +10,8 @@ export class GeminiService {
   public genAi:GoogleGenerativeAI ;
   token:any='';
   constructor(private http: HttpClient) {
-    this.genAi=new GoogleGenerativeAI('AIzaSyAKDx17fXB_DBeq4HQjae4F4AZ8vvX-Di8');
+    let key=environment.APIKEY
+    this.genAi=new GoogleGenerativeAI(key);
    }
    async genText(prompt:string){
     const model = this.genAi.getGenerativeModel({model: "gemini-pro"});

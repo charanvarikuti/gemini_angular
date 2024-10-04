@@ -20,6 +20,7 @@ export class AppComponent {
    form: FormGroup
    txt:any
    apiurl:any
+   reqtxt:any;
    loader:boolean=false
   // geminiService:GeminiService = inject(GeminiService);
   constructor( 
@@ -41,7 +42,9 @@ export class AppComponent {
   sendData(){
     this.loader=true;
     let c=this.form.value.Chat;
+    this.reqtxt=this.form.value.Chat;
     if(c==""){
+      this.loader=false;
       this.txt="Please enter the Info to Continue"
     }else{
       this.loader=true;
