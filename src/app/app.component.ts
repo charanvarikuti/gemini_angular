@@ -20,6 +20,7 @@ export class AppComponent {
   title = 'geminidemo';
    form: FormGroup
    txt:any
+   popup:any;
    apiurl:any
    reqtxt:any;
    loader:boolean=false
@@ -68,7 +69,14 @@ export class AppComponent {
             this.loader1=false
           }, 1000);
         });
-    }
+        this.popup = document.getElementById("popup");
+        this.popup.classList.add("show");
+
+  // Hide the popup after 2 seconds
+  // setTimeout(function() {
+  //   this.popup.classList.remove("show");
+  // }, 2000);
+}
   }
   copytoclipboard(text: string){
     this.clipboard.copy(text);  

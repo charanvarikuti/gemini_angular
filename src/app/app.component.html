@@ -2,6 +2,10 @@
 <div class="main-container">
     <div class="result-text" *ngIf="txt && !loader">
         <div class="text-section">
+            <div style="width: 5%;
+                    margin: auto;" >
+                <img  style="width:20px; margin:auto; height: 20px;" src="logo.jpg"/>
+            </div>
             <markdown style="color:rgb(7, 7, 9);width: 90%;" [data]="txt"></markdown>
 
             <button style="color: white;
@@ -12,18 +16,28 @@
             height: 20px;
             background-color: #333;
             margin-right: 1rem;" *ngIf="!copied &&initialFlag"(click)="copytoclipboard(txt)">Copy</button>
-            <span *ngIf="copied" style="color: rgb(35, 47, 60); margin-left: 10px;float: right;">Copied to Clipboard!</span>
+            <button style="color: white;
+            border-radius: 0.5rem;
+            cursor: pointer;
+            margin-top: 1rem;
+            width: 50px;
+            height: 20px;
+            background-color: #333;
+            margin-right: 1rem;" *ngIf="copied "(click)="copytoclipboard(txt)">Copied</button>
+            <!-- <span *ngIf="!copied" style="color: rgb(35, 47, 60); margin-left: 10px;float: right;">Copied to Clipboard!</span> -->
           
         </div>
         
         <div class="req_text"> 
-            <markdown  style=" text-align: right; color: #800000;"[data]="reqtxt"></markdown>
+            <!-- <markdown  style=" text-align: right; color: #800000;"[data]="reqtxt"></markdown> -->
+            <span class="text-section" *ngIf="reqtxt">{{reqtxt}}</span>
+
         </div>
     </div>
    
     <form name="f" [formGroup]="form"  (ngSubmit)="sendData()"class="form">
         <div class="text-area">
-            <input  keyup.enter="sendData()" name="name" type="text" style="width: 99%; border-radius: 0.3em;" formControlName="Chat" placeholder="Enter Info needed" type="name" >
+            <input  keyup.enter="sendData()" name="name" type="text" style="width: 99%; border-radius: 0.3em; padding: 5px;" formControlName="Chat" placeholder="Enter Info needed" type="name" >
         </div>
         <div class="buttonsection fa fa-paper-plane ">
             <button style="background-color: black;
@@ -37,7 +51,7 @@
         </div>
         <div class="fa-paper-plane"></div>
     </form>
-    
+    <!-- <div id="popup"  *ngIf="!copied"  class="popup">Copied to clipboard!</div> -->
 </div>
 <!-- 
 <div class="spinner1" >
