@@ -11,6 +11,7 @@ import { MarkdownModule } from 'ngx-markdown';
 import { API_URL } from './app.tokens';
 import { LoaderComponent } from './loader/loader.component';
 import { ClipboardModule } from '@angular/cdk/clipboard';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 @NgModule({
   declarations: [
     AppComponent,
@@ -21,7 +22,8 @@ import { ClipboardModule } from '@angular/cdk/clipboard';
     AppRoutingModule,
     ReactiveFormsModule,
     MarkdownModule.forRoot(),
-    ClipboardModule
+    ClipboardModule,
+    FontAwesomeModule
     // HttpClient
     // GoogleGenerativeAI
   ],
