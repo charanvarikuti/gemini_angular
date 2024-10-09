@@ -9,6 +9,7 @@ import { TtsService } from './tts.service'
 import { API_URL } from './app.tokens';
 import { from } from 'rxjs';
 import { Clipboard } from '@angular/cdk/clipboard';
+import { SpeechService } from './speechtotext.service';
 
 @Component({
   selector: 'app-root',
@@ -24,6 +25,8 @@ export class AppComponent {
    popup:any;
    apiurl:any
    reqtxt:any;
+   isTyping: boolean = false;
+   throughspeech:boolean=false;
    urlToShare:any;
    loader:boolean=false
    loader1:boolean=false
@@ -31,13 +34,18 @@ export class AppComponent {
    initialFlag:boolean=false;
    textToSpeak: string = '';
    speakToogle:boolean=false;
+   chatHistory:any=[];
+   transcript: string = '';
+   isRecording: boolean = false;
+ 
   // geminiService:GeminiService = inject(GeminiService);
   constructor( 
     public http: HttpClient,
     public geminiService:GeminiService,
     public fb: FormBuilder,
     private clipboard: Clipboard,
-    private ttsService: TtsService
+    private ttsService: TtsService,
+    private speechService: SpeechService
     // @Inject(API_URL) private apiUrlToken: string
   )
   {
@@ -45,8 +53,8 @@ export class AppComponent {
       Chat: ['', [Validators.required]],
      
     });
-    this.txt="Ask V"
-    if(this.txt=="Ask V"){
+    this.txt="V-Chat"
+    if(this.txt=="V-Chat"){
       this.initialFlag=false
     }
     this.urlToShare='https://yourwebsite.com'
@@ -55,10 +63,13 @@ export class AppComponent {
   ngOnInit(){
     // this.buildForm()
   }
-  sendData(){
+  sendData(data?:any){
     this.loader=true;
-    let c=this.form.value.Chat;
-    this.reqtxt=this.form.value.Chat;
+    // this.reqtxt=this.form.value.Chat;
+    let c= !this.throughspeech? this.form.value.Chat:this.reqtxt;
+    if(this.reqtxt){
+      this.transcript=""
+    }
     this.popup=document.getElementById("inputField");
     // console.log(s)
     this.popup.value="";
@@ -67,13 +78,17 @@ export class AppComponent {
       this.loader=false;
       this.txt="Please enter the Info to Continue"
     }else{
+      // let text
       this.loader=true;
       this.loader1=true
+      this.speakToogle=false;
+      this.chatHistory.push( {user:true,text:c});
       from(this.geminiService.genText(c)).subscribe(u => 
         {
           this.loader=false
           this.txt = u
           this.initialFlag=true
+          this.chatHistory.push({user:false,text: this.txt });
           setTimeout(() => {
             this.loader1=false
           }, 1000);
@@ -116,4 +131,24 @@ export class AppComponent {
       alert('Web Share API is not supported in your browser.');
     }
   }
+
+  startVoiceRecognition() {
+    this.isRecording = true;
+    this.speechService.startListening((text: string) => {
+      this.transcript = text;
+      this.reqtxt=this.transcript
+    });
+    // this.sendData(this.transcript)
+  }
+
+  stopVoiceRecognition() {
+    this.isRecording = false;
+    this.throughspeech=true;
+    this.speechService.stopListening();
+    this.sendData(this.reqtxt);
+
+
+  }
 }
+
+

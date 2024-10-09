@@ -21,7 +21,7 @@
 .buttonsection{
     margin-top: -0.3%;
     margin-bottom: 5%;
-    margin-left: 2%;
+    // margin-left: 2%;
 }
 //mobile 
 @media screen  and (max-width:767px) {
@@ -103,5 +103,113 @@
   .popup.show {
     visibility: visible;
     opacity: 1;
+  }
+  .user{
+
+  }
+  .bot{
+
+  }
+/* src/app/chatbot/chatbot.component.css */
+.chat-container {
+    display: flex;
+    border-radius: 10px;
+    flex-direction: column;
+    // max-width: 600px;
+    margin: 0 auto;
+    border: 1px solid #ccc;
+    padding: 20px;
+    .options{
+        text-align: right;
+        padding: 5px;
+    }
+  }
+  
+  .messages {
+    flex-grow: 1;
+    overflow-y: auto;
+    margin-bottom: 10px;
+  }
+  
+  .user {
+    float: right;
+    background-color: #d1e7ff;
+    margin-bottom: 5px;
+    padding: 10px;
+    border-radius: 10px;
+  }
+  
+  .bot {
+    float: left;
+
+    width: 97%;
+    background-color: #f1f1f1;
+    margin-bottom: 5px;
+    padding: 10px;
+    border-radius: 10px;
+  }
+  @media screen  and (max-width:767px) {
+    .bot {
+        float: left;
+    
+        width: 85%;
+        background-color: #f1f1f1;
+        margin-bottom: 5px;
+        padding: 10px;
+        border-radius: 10px;
+      }
+  }
+  input {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+  }
+
+
+  /* Typing indicator animation */
+  .typing-indicator {
+    display: inline-flex;
+    align-items: center;
+  }
+  
+  .typing-indicator span {
+    display: block;
+    width: 8px;
+    height: 8px;
+    margin: 0 3px;
+    background-color: #888;
+    border-radius: 50%;
+    opacity: 0;
+    animation: blink 1.5s infinite;
+  }
+  
+  .typing-indicator span:nth-child(1) {
+    animation-delay: 0s;
+  }
+  
+  .typing-indicator span:nth-child(2) {
+    animation-delay: 0.3s;
+  }
+  
+  .typing-indicator span:nth-child(3) {
+    animation-delay: 0.6s;
+  }
+  
+  @keyframes blink {
+    0% {
+      opacity: 0;
+    }
+    50% {
+      opacity: 1;
+    }
+    100% {
+      opacity: 0;
+    }
+  }
+  
+  input {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
   }
   
