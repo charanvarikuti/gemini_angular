@@ -65,6 +65,7 @@ export class AppComponent {
   }
   sendData(data?:any){
     this.loader=true;
+    this.isTyping=true;
     // this.reqtxt=this.form.value.Chat;
     let c= !this.throughspeech? this.form.value.Chat:this.reqtxt;
     if(this.reqtxt){
@@ -76,6 +77,7 @@ export class AppComponent {
     
     if(c==""){
       this.loader=false;
+      this.isTyping=false;
       this.txt="Please enter the Info to Continue"
     }else{
       // let text
@@ -85,6 +87,7 @@ export class AppComponent {
       this.chatHistory.push( {user:true,text:c});
       from(this.geminiService.genText(c)).subscribe(u => 
         {
+          this.isTyping=false;
           this.loader=false
           this.txt = u
           this.initialFlag=true
