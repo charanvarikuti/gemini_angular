@@ -25,6 +25,7 @@ export class AppComponent {
    popup:any;
    apiurl:any
    reqtxt:any;
+   isBtnDisable:boolean=true;
    isTyping: boolean = false;
    throughspeech:boolean=false;
    urlToShare:any;
@@ -70,15 +71,14 @@ export class AppComponent {
 
   }
   sendData(data?:any){
+    // this.scrollToDiv();
     this.loader=true;
     this.isTyping=true;
-    // this.reqtxt=this.form.value.Chat;
     let c= !this.throughspeech? this.form.value.Chat:this.reqtxt;
     if(this.reqtxt){
       this.transcript=""
     }
     this.popup=document.getElementById("inputField");
-    // console.log(s)
     this.popup.value="";
     
     if(c==""){
@@ -91,6 +91,8 @@ export class AppComponent {
       this.loader1=true
       this.speakToogle=false;
       this.chatHistory.push( {user:true,text:c});
+          let submitButton = document.getElementById('sendbtn')  as HTMLInputElement;;
+      this.checkInput()
       from(this.geminiService.genText(c)).subscribe(u => 
         {
           this.isTyping=false;
@@ -120,19 +122,19 @@ export class AppComponent {
       this.copied = false;
     }, 1000);
   }
-  texttoSpeech(){
+  texttoSpeech(text:any){
     this.speakToogle=true;
-    this.ttsService.speak(this.txt);
+    this.ttsService.speak(text.text);
   }
   stopSpeaking(): void {
     this.speakToogle=false;
     this.ttsService.stopSpeaking();
   }
-  shareContent(): void {
+  shareContent(messsage:any): void {
     if (navigator.share) {
       navigator.share({
         title: 'Awesome Content',
-        text: this.txt,
+        text: messsage.text,
         url: this.urlToShare,
       })
       .then(() => console.log('Content shared successfully!'))
@@ -155,10 +157,27 @@ export class AppComponent {
     this.isRecording = false;
     this.throughspeech=true;
     this.speechService.stopListening();
-    this.sendData(this.reqtxt);
+    // this.sendData(this.reqtxt);
 
 
   }
+  checkInput(eve?:any) {
+    // Get the input field
+    let inputField = document.getElementById('inputField')  as HTMLInputElement;;
+    let submitButton = document.getElementById('sendbtn')  as HTMLInputElement;;
+
+      if (inputField.value.trim() !== "") {
+        submitButton.disabled = false;
+      } else {
+        submitButton.disabled = true;
+      }
+    // // Log the current value of the input field
+    // console.log(inputField.value);
+  }
+//    scrollToDiv() {
+//     const div = document.getElementById('container') as HTMLInputElement;
+//     div.scrollIntoView({ behavior: 'smooth' });
+// }
 }
 
 
