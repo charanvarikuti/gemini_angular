@@ -38,7 +38,7 @@ export class AppComponent {
    chatHistory:any=[];
    transcript: string = '';
    isRecording: boolean = false;
- 
+   logoFlag:boolean=true;
   // geminiService:GeminiService = inject(GeminiService);
   constructor( 
     public http: HttpClient,
@@ -71,7 +71,7 @@ export class AppComponent {
 
   }
   sendData(data?:any){
-    // this.scrollToDiv();
+    this.logoFlag=false;
     this.loader=true;
     this.isTyping=true;
     let c= !this.throughspeech? this.form.value.Chat:this.reqtxt;
@@ -163,8 +163,8 @@ export class AppComponent {
   }
   checkInput(eve?:any) {
     // Get the input field
-    let inputField = document.getElementById('inputField')  as HTMLInputElement;;
-    let submitButton = document.getElementById('sendbtn')  as HTMLInputElement;;
+    let inputField = document.getElementById('inputField')  as HTMLInputElement;
+    let submitButton = document.getElementById('sendbtn')  as HTMLInputElement;
 
       if (inputField.value.trim() !== "") {
         submitButton.disabled = false;
@@ -174,10 +174,12 @@ export class AppComponent {
     // // Log the current value of the input field
     // console.log(inputField.value);
   }
-//    scrollToDiv() {
-//     const div = document.getElementById('container') as HTMLInputElement;
-//     div.scrollIntoView({ behavior: 'smooth' });
-// }
+startChat(){
+  let inputField = document.getElementById('inputField')  as HTMLInputElement;
+  inputField.focus();
+  this.logoFlag=false;
+
+}
 }
 
 

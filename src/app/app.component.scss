@@ -129,7 +129,7 @@
     flex-direction: column; 
     max-height: 100vh;
     margin: 0 auto;
-    border: 1px solid #ccc;
+    // border: 1px solid #ccc;
     padding: 20px;
     .options{
         text-align: right;
@@ -278,3 +278,38 @@
 //   .main-continer{
 // height: 200px;
 //   }
+.initialPage{
+    margin: auto;
+    display: flex;
+    justify-content: center; /* Horizontally centers the image */
+    align-items: center;     /* Vertically centers the image */
+    // height: 100vh; 
+    .logoV{
+        cursor: pointer;
+        height: 10rem;
+        width: 10rem;
+        width: 100px;
+        height: 100px;
+        // background-image: url('v-logo.svg');
+        background-size: cover;
+        background-position: center;
+        position: relative;
+        animation: scale 2s infinite ease-in-out;
+    }
+
+    @keyframes scale {
+        0%, 100% {
+          transform: scale(1);
+        }
+        50% {
+          transform: scale(1.2);
+        }
+      }
+    
+}
+.chatC{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 90vh;
+}

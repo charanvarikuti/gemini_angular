@@ -3,10 +3,10 @@
 
 <!-- <loader *ngIf="loader"></loader> -->
  <!-- <div class="main-continer" id="main-cont"> -->
-    <div class="chat-container" id="container">
-        <div class="options">
-        </div>
-        <div class="messages">
+    <div class="chat-container" [ngClass]="{'chatC':logoFlag}" id="container">
+        <!-- <div class="options">
+        </div> -->
+        <div class="messages" *ngIf="!logoFlag">
           <div *ngFor="let message of chatHistory" [ngClass]="{'user': message.user, 'bot': !message.user}">
             <div class="options" *ngIf="!message.user">
                 <a  (click)="texttoSpeech(message)"  class="text-options" *ngIf="!speakToogle" style="cursor: pointer; padding: 4px;" >
@@ -44,9 +44,11 @@
         </div>
         <div *ngIf="isTyping" class="typing-indicator">
     
-            <span></span><span></span><span></span> <!-- Dots animation -->
+            <span></span><span></span><span></span> 
         </div>
-    
+        <div class="initialPage" *ngIf="logoFlag" (click)="startChat()">
+            <img class="logoV" src="logo-removebg.png"/>
+        </div>
         <form name="f" [formGroup]="form"  (ngSubmit)="sendData()"class="form">
             <div class="speech">
                 <a (click)="startVoiceRecognition()"  *ngIf="!isRecording" style="
@@ -93,7 +95,9 @@
             </div>
             <div class="fa-paper-plane"></div>
         </form>
-      </div>
+        
+
+    </div>
  <!-- </div> -->
 
 <router-outlet></router-outlet>
