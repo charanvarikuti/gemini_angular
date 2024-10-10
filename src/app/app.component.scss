@@ -295,6 +295,8 @@
         background-position: center;
         position: relative;
         animation: scale 2s infinite ease-in-out;
+        // filter: invert(1);c
+
     }
 
     @keyframes scale {
