@@ -62,6 +62,12 @@ export class AppComponent {
   }
   ngOnInit(){
     // this.buildForm()
+    let allItems = document.querySelectorAll('.dot');
+
+  }
+  ngOnchanges(){
+    let allItems = document.querySelectorAll('.dot');
+
   }
   sendData(data?:any){
     this.loader=true;
@@ -91,6 +97,7 @@ export class AppComponent {
           this.loader=false
           this.txt = u
           this.initialFlag=true
+          let allItems = document.querySelectorAll('.dot');
           this.chatHistory.push({user:false,text: this.txt });
           setTimeout(() => {
             this.loader1=false

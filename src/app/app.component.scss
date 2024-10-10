@@ -212,4 +212,26 @@
     padding: 10px;
     font-size: 16px;
   }
+
+  /* CSS */
+.text-options {
+    opacity: 0.5; /* Default full opacity */
+    transition: opacity 0.3s ease; /* Smooth transition for opacity */
+  }
   
+  .text-options:hover {
+    opacity: 1; /* Change to 50% opacity on hover */
+  }
+  
+  .clear-icon {
+    cursor: pointer;
+    margin-left: -25px;
+    position: relative;
+    right: 10px;
+    top: -30px;
+  }
+  .clearicon{
+    border-radius: 5px;
+    float: right;
+    background: dodgerblue;
+  }

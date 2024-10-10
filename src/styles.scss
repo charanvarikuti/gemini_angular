@@ -1,1 +1,27 @@
-/* You can add global styles to this file, and also import other style files */
+/* Default Light Theme */
+:root {
+    --background-color: #ffffff;
+    --text-color: #000000;
+    --primary-color: #007bff;
+  }
+  
+  /* Dark Theme - applied automatically if the user prefers dark mode */
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --background-color: #121212;
+      --text-color: #ffffff;
+      --primary-color: #bb86fc;
+    }
+  }
+  
+  /* Apply the variables to body, buttons, etc. */
+  body {
+    background-color: var(--background-color);
+    color: var(--text-color);
+  }
+  
+  button {
+    background-color: var(--primary-color);
+    color: var(--text-color);
+  }
+  
